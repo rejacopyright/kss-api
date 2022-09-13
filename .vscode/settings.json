@@ -1,0 +1,24 @@
+{
+  "editor.autoClosingDelete": "always",
+  "editor.autoClosingOvertype": "always",
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingQuotes": "always",
+  "editor.tabSize": 2,
+  "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  "intelephense.telemetry.enabled": true,
+  "intelephense.completion.triggerParameterHints": true,
+  "intelephense.completion.insertUseDeclaration": true,
+  "intelephense.trace.server": "messages",
+  "intelephense.diagnostics.undefinedClassConstants": true,
+  "intelephense.diagnostics.undefinedFunctions": true,
+  "intelephense.diagnostics.undefinedConstants": true,
+  "intelephense.diagnostics.undefinedProperties": true,
+  "intelephense.diagnostics.undefinedTypes": false,
+  "intelephense.diagnostics.undefinedMethods": true,
+  "php.validate.enable": true,
+  "php.validate.run": "onSave",
+}
