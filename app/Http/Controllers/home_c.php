@@ -13,7 +13,7 @@ class home_c extends Controller
 
     function getBanner()
     {
-        $banner = banner::paginate(10)->through(function ($m) {
+        $banner = banner::orderBy('index', 'desc')->paginate(10)->through(function ($m) {
             $m->file = asset("/storage/home/banner/$m->file");
             return $m;
         });
