@@ -21,4 +21,17 @@
   "intelephense.diagnostics.undefinedMethods": true,
   "php.validate.enable": true,
   "php.validate.run": "onSave",
+  "intelephense.files.exclude": [
+    "**/.git/**",
+    "**/.svn/**",
+    "**/.hg/**",
+    "**/CVS/**",
+    "**/.DS_Store/**",
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**/{Tests,tests}/**",
+    "**/.history/**",
+    "**/vendor/**/vendor/**",
+    "**/lib/tests/**"
+  ],
 }

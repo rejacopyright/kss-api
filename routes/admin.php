@@ -25,4 +25,5 @@ Route::group(["middleware" => "auth:admin-api"], function () {
         Route::put('media/{id}', 'news_media_c@editMedia');
         Route::delete('media/{id}', 'news_media_c@deleteMedia');
     });
+    Route::put('about/{scope}', 'about_c@editAbout');
 });
