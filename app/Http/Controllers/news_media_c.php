@@ -62,4 +62,12 @@ class news_media_c extends Controller
         $media->save();
         return response()->json(['status' => 200, 'success' => true, 'message' => 'Perubahan berhasil disimpan']);
     }
+
+    function deleteMedia($id)
+    {
+        $media = media::findOrFail($id);
+        $media_name = $media->title;
+        $media->forceDelete();
+        return response()->json(['success' => true, 'message' => "Berhasil menghapus $media_name"]);
+    }
 }
