@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request as req;
 use App\Traits\Uploader;
 use App\Models\home_banner as banner;
+use App\Models\home_assets as assets;
 use Storage;
 
 class home_c extends Controller
@@ -61,5 +62,42 @@ class home_c extends Controller
         // $banner->delete(); // Soft Delete
         $banner->forceDelete();
         return response()->json(['success' => true, 'message' => "Berhasil menghapus $banner_name"]);
+    }
+
+    function getAssets()
+    {
+        return assets::orderBy('index', 'asc')->paginate(10);
+    }
+
+    function addAssets(req $r)
+    {
+        // Store
+        $index = assets::count() + 1;
+        $assets = new assets;
+        $assets->index = $index;
+        $assets->count = $r->count;
+        $assets->title = $r->title;
+        $assets->description = $r->description;
+        $assets->save();
+        return response()->json(['status' => 200, 'success' => true, 'message' => "Berhasil menambahkan $assets->title"]);
+    }
+
+    function editAssets(req $r, $id)
+    {
+        // Store
+        $assets = assets::find($id);
+        $assets->count = $r->count;
+        $assets->title = $r->title;
+        $assets->description = $r->description;
+        $assets->save();
+        return response()->json(['status' => 200, 'success' => true, 'message' => 'Perubahan berhasil disimpan']);
+    }
+
+    function deleteAssets($id)
+    {
+        $assets = assets::findOrFail($id);
+        $assets_name = $assets->title;
+        $assets->forceDelete();
+        return response()->json(['success' => true, 'message' => "Berhasil menghapus $assets_name"]);
     }
 }

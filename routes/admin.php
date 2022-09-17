@@ -18,6 +18,9 @@ Route::group(["middleware" => "auth:admin-api"], function () {
         Route::post('banner', 'home_c@addBanner');
         Route::put('banner/{id}', 'home_c@editBanner');
         Route::delete('banner/{id}', 'home_c@deleteBanner');
+        Route::post('assets', 'home_c@addAssets');
+        Route::put('assets/{id}', 'home_c@editAssets');
+        Route::delete('assets/{id}', 'home_c@deleteAssets');
     });
     Route::group(['prefix' => 'news'], function () {
         Route::get('media', 'news_media_c@getMedia');

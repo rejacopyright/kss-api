@@ -11,9 +11,10 @@ class news_media_c extends Controller
 {
     use Uploader;
 
-    function getMedia()
+    function getMedia(req $r)
     {
-        $media = media::orderBy('created_at', 'desc')->paginate(10)->through(function ($m) {
+        $limit = $r->has('limit') ? $r->limit : 10;
+        $media = media::orderBy('created_at', 'desc')->paginate($limit)->through(function ($m) {
             $m->file = $m->file ? asset("/storage/news/media/$m->file") : null;
             return $m;
         });
