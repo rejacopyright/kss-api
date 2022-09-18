@@ -47,5 +47,6 @@ Route::group(["middleware" => "auth:admin-api"], function () {
     // SETTINGS
     Route::group(['prefix' => 'settings'], function () {
         Route::put('social', 'settings_c@editSocial');
+        Route::put('contact', 'settings_c@editContact');
     });
 });

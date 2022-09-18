@@ -20,3 +20,4 @@ Route::get('services/{id}', 'services_c@detailServices');
 Route::get('about', 'about_c@getAbout');
 Route::get('about/{scope}', 'about_c@detailAbout');
 Route::get('settings/social', 'settings_c@getSocial');
+Route::get('settings/contact', 'settings_c@getContact');
