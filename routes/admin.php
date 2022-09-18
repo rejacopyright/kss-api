@@ -23,6 +23,9 @@ Route::group(["middleware" => "auth:admin-api"], function () {
         Route::post('assets', 'home_c@addAssets');
         Route::put('assets/{id}', 'home_c@editAssets');
         Route::delete('assets/{id}', 'home_c@deleteAssets');
+        Route::post('customer', 'home_c@addCustomer');
+        Route::put('customer/{id}', 'home_c@editCustomer');
+        Route::delete('customer/{id}', 'home_c@deleteCustomer');
     });
 
     // NEWS

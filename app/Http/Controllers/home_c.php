@@ -6,6 +6,7 @@ use Illuminate\Http\Request as req;
 use App\Traits\Uploader;
 use App\Models\home_banner as banner;
 use App\Models\home_assets as assets;
+use App\Models\home_customer as customer;
 use Storage;
 
 class home_c extends Controller
@@ -99,5 +100,58 @@ class home_c extends Controller
         $assets_name = $assets->title;
         $assets->forceDelete();
         return response()->json(['success' => true, 'message' => "Berhasil menghapus $assets_name"]);
+    }
+
+    function getCustomer(req $r)
+    {
+        $limit = $r->has('limit') ? $r->limit : 10;
+        $customer = customer::orderBy('index', 'desc')->paginate($limit)->through(function ($m) {
+            $m->file = $m->file ? asset("/storage/home/customer/$m->file") : null;
+            return $m;
+        });
+        return $customer;
+    }
+
+    function addCustomer(req $r)
+    {
+        $base64 = $r->file;
+        $file = $this->fileUpload($base64, 'home/customer/');
+        // Store
+        $index = customer::count() + 1;
+        $customer = new customer;
+        $customer->index = $index;
+        $customer->title = $r->title;
+        $customer->description = $r->description;
+        $customer->file = $file;
+        $customer->save();
+        return response()->json(['status' => 200, 'success' => true, 'message' => "Berhasil menambahkan $customer->title"]);
+    }
+
+    function editCustomer(req $r, $id)
+    {
+        $customer = customer::find($id);
+        if ($r->has('file') || $r->file) {
+            if (Storage::disk('local')->exists("home/customer/$customer->file") && $customer->file !== null) {
+                Storage::disk('local')->delete("home/customer/$customer->file");
+            }
+            $base64 = $r->file;
+            $file = $this->fileUpload($base64, 'home/customer/');
+            $customer->file = $file;
+        }
+        // Store
+        $customer->title = $r->title;
+        $customer->description = $r->description;
+        $customer->save();
+        return response()->json(['status' => 200, 'success' => true, 'message' => 'Perubahan berhasil disimpan']);
+    }
+
+    function deleteCustomer($id)
+    {
+        $customer = customer::findOrFail($id);
+        $customer_name = $customer->title;
+        $images = $customer->img;
+        // $customer->delete(); // Soft Delete
+        $customer->forceDelete();
+        return response()->json(['success' => true, 'message' => "Berhasil menghapus $customer_name"]);
     }
 }

@@ -12,6 +12,7 @@ Route::get('login', function () {
 
 Route::get('home/banner', 'home_c@getBanner');
 Route::get('home/assets', 'home_c@getAssets');
+Route::get('home/customer', 'home_c@getCustomer');
 Route::get('news/media', 'news_media_c@getMedia');
 Route::get('news/media/{id}', 'news_media_c@detailMedia');
 Route::get('services', 'services_c@getServices');
