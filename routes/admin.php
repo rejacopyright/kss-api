@@ -34,6 +34,9 @@ Route::group(["middleware" => "auth:admin-api"], function () {
         Route::post('media', 'news_media_c@addMedia');
         Route::put('media/{id}', 'news_media_c@editMedia');
         Route::delete('media/{id}', 'news_media_c@deleteMedia');
+        Route::post('carreer', 'news_carreer_c@addCarreer');
+        Route::put('carreer/{id}', 'news_carreer_c@editCarreer');
+        Route::delete('carreer/{id}', 'news_carreer_c@deleteCarreer');
     });
 
     // SERVICES

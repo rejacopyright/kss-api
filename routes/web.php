@@ -15,6 +15,8 @@ Route::get('home/assets', 'home_c@getAssets');
 Route::get('home/customer', 'home_c@getCustomer');
 Route::get('news/media', 'news_media_c@getMedia');
 Route::get('news/media/{id}', 'news_media_c@detailMedia');
+Route::get('news/carreer', 'news_carreer_c@getCarreer');
+Route::get('news/carreer/{id}', 'news_carreer_c@detailCarreer');
 Route::get('services', 'services_c@getServices');
 Route::get('services/{id}', 'services_c@detailServices');
 Route::get('about', 'about_c@getAbout');
