@@ -10,49 +10,42 @@ use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Storage;
 
 class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable, Uuids, SoftDeletes;
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $guarded = [];
-
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
         'api_token',
     ];
-
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
         'address' => 'array',
     ];
 
-    function getJWTIdentifier(){
+    function getJWTIdentifier()
+    {
         return $this->getKey();
     }
 
-    function getJWTCustomClaims(){
+    function getJWTCustomClaims()
+    {
         return [];
     }
 
-    static function boot(){
+    static function boot()
+    {
         parent::boot();
         static::generateId();
+        static::deleting(function ($user) {
+            if ($user->isForceDeleting()) {
+                if (Storage::disk('local')->exists("user/$user->file")) {
+                    Storage::disk('local')->delete("user/$user->file");
+                }
+            }
+        });
     }
 }

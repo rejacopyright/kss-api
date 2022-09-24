@@ -9,28 +9,38 @@ use Illuminate\Database\Eloquent\Model;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Traits\Uuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Storage;
+use Spatie\Permission\Traits\HasRoles;
 
 class admin extends Authenticatable implements JWTSubject
 {
-    use HasApiTokens, HasFactory, Uuids, SoftDeletes;
+    use HasRoles, HasApiTokens, HasFactory, Uuids, SoftDeletes;
     protected $table = 'admin';
+    protected $guard_name = 'admin-api';
     protected $guarded = [];
     protected $hidden = ['password'];
     protected $cast = ['address' => 'array'];
 
-    function getJWTIdentifier(){
+    function getJWTIdentifier()
+    {
         return $this->getKey();
     }
 
-    function getJWTCustomClaims(){
+    function getJWTCustomClaims()
+    {
         return [];
     }
-    
-    public static function boot() {
+
+    public static function boot()
+    {
         parent::boot();
         static::generateId();
-        // static::deleting(function($product) {
-        //     // Query
-        // });
+        static::deleting(function ($admin) {
+            if ($admin->isForceDeleting()) {
+                if (Storage::disk('local')->exists("admin/$admin->avatar") && !empty($admin->avatar)) {
+                    Storage::disk('local')->delete("admin/$admin->avatar");
+                }
+            }
+        });
     }
 }

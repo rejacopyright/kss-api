@@ -8,6 +8,7 @@ Route::get('test', 'test@index');
 Route::post('login', 'auth\admin_login_c@login');
 Route::get('logout', 'auth\admin_login_c@logout');
 
+Route::get('test/role', 'test@testRole');
 Route::group(["middleware" => "auth:admin-api"], function () {
     Route::get('/', function () {
         return 'protected admin';
@@ -52,4 +53,10 @@ Route::group(["middleware" => "auth:admin-api"], function () {
         Route::put('social', 'settings_c@editSocial');
         Route::put('contact', 'settings_c@editContact');
     });
+
+    // USERS
+    Route::get('user', 'admin_c@getAdmin');
+    Route::post('user', 'admin_c@addAdmin');
+    Route::put('user/{id}', 'admin_c@editAdmin');
+    Route::delete('user/{id}', 'admin_c@deleteAdmin');
 });
