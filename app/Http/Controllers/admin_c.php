@@ -30,6 +30,13 @@ class admin_c extends Controller
         return $admin;
     }
 
+    function detailAdmin($id)
+    {
+        $admin = admin::find($id);
+        $admin->avatar = $admin->avatar ? asset("/storage/admin/$admin->avatar") : null;
+        return $admin;
+    }
+
     function addAdmin(req $r)
     {
         // VALIDATION
