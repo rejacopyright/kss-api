@@ -19,7 +19,7 @@ class admin extends Authenticatable implements JWTSubject
     protected $guard_name = 'admin-api';
     protected $guarded = [];
     protected $hidden = ['password'];
-    protected $cast = ['address' => 'array'];
+    protected $cast = ['address' => 'array', 'role_id' => 'integer'];
 
     function getJWTIdentifier()
     {
