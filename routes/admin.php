@@ -15,6 +15,11 @@ Route::group(["middleware" => "auth:admin-api"], function () {
     });
     Route::get('me', 'auth\admin_login_c@me');
 
+    // DASHBOARD
+    Route::group(['prefix' => 'dashboard'], function () {
+        Route::get('analytics', 'dashboard_c@analytics');
+    });
+
     // HOME
     Route::group(['prefix' => 'home'], function () {
         Route::get('banner', 'home_c@getBanner');
