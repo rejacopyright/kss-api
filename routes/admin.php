@@ -7,6 +7,9 @@ Route::get('test', 'test@index');
 
 Route::post('login', 'auth\admin_login_c@login');
 Route::get('logout', 'auth\admin_login_c@logout');
+Route::post('forgot-password', 'auth\admin_password_c@forgot');
+Route::post('reset-password', 'auth\admin_password_c@reset');
+Route::post('invalidate-token', 'auth\admin_password_c@invalidateToken');
 
 Route::get('test/role', 'test@testRole');
 Route::group(["middleware" => "auth:admin-api"], function () {
