@@ -25,7 +25,7 @@ class news_media extends Model
         parent::boot();
         static::generateId();
         static::deleting(function ($media) {
-            if ($media->isForceDeleting()) {
+            if ($media->isForceDeleting() && !empty($media->file)) {
                 if (Storage::disk('local')->exists("news/media/$media->file")) {
                     Storage::disk('local')->delete("news/media/$media->file");
                 }
