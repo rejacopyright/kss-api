@@ -19,6 +19,11 @@ class about extends Model
         'deleted_at' => 'date:Y-m-d H:i:s',
     ];
 
+    public function children()
+    {
+        return $this->hasMany(self::class, 'parent', 'scope');
+    }
+
     public static function boot()
     {
         parent::boot();

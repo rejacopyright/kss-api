@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
             $table->jsonb('files')->nullable()->default(collect(['index' => '', 'name' => '', 'file' => '']));
+            $table->string('parent')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

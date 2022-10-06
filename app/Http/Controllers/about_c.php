@@ -10,7 +10,7 @@ class about_c extends Controller
 {
     function getAbout()
     {
-        return about::orderBy('index', 'asc')->paginate(10);
+        return about::orderBy('index', 'asc')->with(['children'])->paginate(10);
     }
 
     function detailAbout($scope)

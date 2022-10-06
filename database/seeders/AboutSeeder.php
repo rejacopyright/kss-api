@@ -22,6 +22,8 @@ class AboutSeeder extends Seeder
             ['index' => 4, 'scope' => 'organization', 'title' => 'Organization Structure', 'description' => 'Organization Structure'],
             ['index' => 5, 'scope' => 'certification', 'title' => 'Certification', 'description' => 'Certification'],
             ['index' => 6, 'scope' => 'management', 'title' => 'Management', 'description' => 'Management'],
+            ['index' => 7, 'scope' => 'commissioners', 'title' => 'Board of Commissioners', 'description' => 'Board of Commissioners', 'parent' => 'management'],
+            ['index' => 8, 'scope' => 'directors', 'title' => 'Board of Directors', 'description' => 'Board of Directors', 'parent' => 'management'],
         ];
         foreach ($data as $item) {
             $updater = collect($item)->only(['scope'])->toArray();
