@@ -37,6 +37,9 @@ Route::group(["middleware" => "auth:admin-api"], function () {
         Route::delete('customer/{id}', 'home_c@deleteCustomer');
     });
 
+    // BANNER
+    Route::put('banner/{module}', 'banner_c@editBanner');
+
     // NEWS
     Route::group(['prefix' => 'news'], function () {
         Route::get('media', 'news_media_c@getMedia');

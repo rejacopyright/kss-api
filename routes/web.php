@@ -13,6 +13,8 @@ Route::get('login', function () {
 Route::get('home/banner', 'home_c@getBanner');
 Route::get('home/assets', 'home_c@getAssets');
 Route::get('home/customer', 'home_c@getCustomer');
+Route::get('banner', 'banner_c@getBanner');
+Route::get('banner/{module}', 'banner_c@detailBanner');
 Route::get('news/media', 'news_media_c@getMedia');
 Route::get('news/media/{id}', 'news_media_c@detailMedia');
 Route::get('news/carreer', 'news_carreer_c@getCarreer');
