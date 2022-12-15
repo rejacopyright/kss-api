@@ -14,10 +14,15 @@ class about extends Model
     protected $guarded = [];
     protected $casts = [
         'files' => 'array',
-        'created_at' => 'date:Y-m-d H:i:s',
-        'updated_at' => 'date:Y-m-d H:i:s',
-        'deleted_at' => 'date:Y-m-d H:i:s',
+        // 'created_at' => 'date:Y-m-d H:i:s',
+        // 'updated_at' => 'date:Y-m-d H:i:s',
+        // 'deleted_at' => 'date:Y-m-d H:i:s',
     ];
+
+    protected function serializeDate($date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 
     public function children()
     {

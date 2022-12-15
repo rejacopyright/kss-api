@@ -12,11 +12,16 @@ class news_carreer extends Model
     use HasFactory, Uuids, SoftDeletes;
     protected $table = 'news_carreer';
     protected $guarded = [];
-    protected $casts = [
-        'created_at' => 'date:Y-m-d H:i:s',
-        'updated_at' => 'date:Y-m-d H:i:s',
-        'deleted_at' => 'date:Y-m-d H:i:s',
-    ];
+    // protected $casts = [
+    //     'created_at' => 'date:Y-m-d H:i:s',
+    //     'updated_at' => 'date:Y-m-d H:i:s',
+    //     'deleted_at' => 'date:Y-m-d H:i:s',
+    // ];
+
+    protected function serializeDate($date)
+    {
+        return $date->format('Y-m-d H:i:s');
+    }
 
     public static function boot()
     {
