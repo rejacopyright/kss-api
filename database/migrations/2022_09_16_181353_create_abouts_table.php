@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('about', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->integer('active')->nullable()->default(1);
             $table->integer('index')->nullable()->default(0);
             $table->string('scope')->nullable();
             $table->string('title')->nullable();
