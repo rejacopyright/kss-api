@@ -12,7 +12,7 @@ class dashboard_c extends Controller
     // -------------------------- ANALYTICS --------------------------
     function analytics()
     {
-        $visitor = Analytics::fetchTotalVisitorsAndPageViews(Period::days(6));
+        $visitor = Analytics::fetchTotalVisitorsAndPageViews(Period::days(7));
         $view = Analytics::get(Period::months(1), ['activeUsers', 'totalUsers', 'screenPageViews'], ['country']);
         $report = collect($view)->map(function ($data) {
             return ['country' => $data['country'], 'users' => $data['totalUsers'], 'views' => $data['screenPageViews']];
@@ -25,7 +25,7 @@ class dashboard_c extends Controller
             }
             return $m;
         });
-        $visitor = $visitor->map(function ($m) {
+        $visitor = $visitor->sortBy('date')->values()->map(function ($m) {
             $date = Carbon::parse($m['date']);
             $m['date'] = $date->translatedFormat('Y-m-d');
             $m['day'] = $date->translatedFormat('l');
