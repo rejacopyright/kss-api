@@ -39,6 +39,7 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'services', 'guard_name' => 'admin-api']);
         Permission::create(['name' => 'services.general', 'guard_name' => 'admin-api']);
         Permission::create(['name' => 'services.marine', 'guard_name' => 'admin-api']);
+        Permission::create(['name' => 'services.order', 'guard_name' => 'admin-api']);
         // SETTINGS
         Permission::create(['name' => 'settings', 'guard_name' => 'admin-api']);
         Permission::create(['name' => 'settings.social', 'guard_name' => 'admin-api']);

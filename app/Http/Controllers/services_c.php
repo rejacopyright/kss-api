@@ -13,6 +13,12 @@ class services_c extends Controller
 
     function getServices(req $r)
     {
+
+        if ($r->type === 'how-to-order') {
+            $order = services::where('type', 'how-to-order')->first();
+            return $order;
+        }
+
         $limit = $r->has('limit') ? $r->limit : 10;
         $type = $r->has('type') ? $r->type : 'general';
         $services = services::where(compact('type'))->orderBy('created_at', 'desc')->paginate($limit)->through(function ($m) {
@@ -73,5 +79,16 @@ class services_c extends Controller
         $services_name = $services->title;
         $services->forceDelete();
         return response()->json(['success' => true, 'message' => "Berhasil menghapus $services_name"]);
+    }
+
+    function editHowToOrder(req $r)
+    {
+        services::where('type', 'how-to-order')->updateOrCreate([
+            'index' => 0,
+            'type' => 'how-to-order'
+        ], [
+            'description' => $r->description,
+        ]);
+        return response()->json(['status' => 200, 'success' => true, 'message' => 'Perubahan berhasil disimpan']);
     }
 }

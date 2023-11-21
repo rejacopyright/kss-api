@@ -60,6 +60,7 @@ Route::group(["middleware" => "auth:admin-api"], function () {
     Route::post('services', 'services_c@addServices');
     Route::put('services/{id}', 'services_c@editServices');
     Route::delete('services/{id}', 'services_c@deleteServices');
+    Route::put('services/category/how-to-order', 'services_c@editHowToOrder');
 
     // ABOUT
     Route::put('about/{scope}', 'about_c@editAbout');
